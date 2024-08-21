@@ -11,8 +11,7 @@ export const ThoughtBox = () => {
         <Button
           size="lg"
           variant="bordered"
-          className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition "
-        >
+          className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition ">
           share
         </Button>
       </div>
