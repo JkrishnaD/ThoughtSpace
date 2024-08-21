@@ -5,11 +5,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import Link from "next/link";
 
 export const Navbar = () => {
   return (
     <div className="text-white flex flex-row justify-between z-20 p-4 px-20 bg-inherit">
-      <div className="text-xl font-bold font-mono">ThoughtSpace</div>
+      <div className="text-xl font-bold font-mono"><Link href="/home">ThoughtSpace</Link></div>
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger className="font-bold">
