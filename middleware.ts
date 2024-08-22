@@ -9,9 +9,9 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
 
-  if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL("/", nextUrl));
-  }
+  // if (!isLoggedIn && !isPublicRoute) {
+  //   return Response.redirect(new URL("/", nextUrl));
+  // }
 
 });
 
