@@ -18,7 +18,7 @@ export const Navbar = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="z-50 bg-white text-black p-2 rounded-md space-y-3 ">
             <DropdownMenuItem>Name</DropdownMenuItem>
-            <DropdownMenuItem>My Thoughts</DropdownMenuItem>
+            <DropdownMenuItem><Link href='/mythoughts'>My THoughts</Link></DropdownMenuItem>
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
