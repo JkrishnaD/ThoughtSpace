@@ -1,16 +1,18 @@
 "use client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
 
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/current-user";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { DEFAULT_PUBLIC_ROUTE } from "@/routes";
+import { AvatarComponent } from "./avatar";
 
 export const Navbar = () => {
   const user = useCurrentUser();
@@ -21,15 +23,16 @@ export const Navbar = () => {
       </div>
       <div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="font-bold">
+          <DropdownMenuTrigger className="font-bold text-black">
+            <AvatarComponent/>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="z-50 bg-white text-black p-2 rounded-md space-y-3 ">
-            <DropdownMenuItem>Name</DropdownMenuItem>
+            <DropdownMenuItem>{user?.name || ""}</DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/mythoughts">My THoughts</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Button onClick={() => signOut()}>Logout</Button>{" "}
+              <Button onClick={() => signOut({callbackUrl:DEFAULT_PUBLIC_ROUTE})}>Logout</Button>{" "}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
