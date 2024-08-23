@@ -32,9 +32,9 @@ export default function Home() {
                 <Button>Share</Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Sign In</DialogTitle>
-                  <DialogDescription>
+                <DialogHeader className="flex gap-2 items-center">
+                  <DialogTitle className="font-bold">Sign In</DialogTitle>
+                  <DialogDescription className="font-semibold">
                     Sign In Using Your Google or Github Account
                   </DialogDescription>
                 </DialogHeader>
