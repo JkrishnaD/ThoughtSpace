@@ -6,12 +6,17 @@ import { Input } from "@/components/ui/input";
 import { sendThought } from "@/actions/addThought";
 import { toast } from "sonner";
 import { DisplayThought } from "@/components/dispaly-thoughts";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   const [thought, setThought] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const onClick = () => {
+    if (!thought || thought.trim() === "") {
+      toast.error("Thought is Empty!");
+      return null;
+    }
     startTransition(() => {
       sendThought({ thought });
       toast.success("Thought Created");
@@ -19,31 +24,57 @@ const HomePage = () => {
   };
 
   return (
-    <div className="fixed inset-0 -z-10 h-full w-full items-center [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-      <div>
+    <div className="min-h-screen inset-0 -z-10 h-full w-full items-center [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <Navbar />
-      </div>
-      <div className="relative mt-20 flex justify-center items-center">
+      </motion.div>
+      <motion.div
+        className="relative mt-15 flex justify-center items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 2 }}
+        transition={{ duration: 1 }}
+      >
         <div className="flex items-center justify-center flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 font-mono">
-          <Input
-            className="backdrop-blur-lg bg-transparent h-fit placeholder:text-white text-white w-[300px] lg:w-[600px] p-4"
-            placeholder="Share Your Thought....."
-            onChange={(e) => setThought(e.target.value)}
-          />
-          <Button
-            size="lg"
-            variant="bordered"
-            className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition"
-            onClick={onClick}
-            isDisabled={isPending}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            share
-          </Button>
+            <Input
+              className="backdrop-blur-lg bg-transparent h-fit placeholder:text-white text-white w-[300px] lg:w-[600px] p-4"
+              placeholder="Share Your Thought....."
+              onChange={(e) => setThought(e.target.value)}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Button
+              size="lg"
+              variant="bordered"
+              className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition"
+              onClick={onClick}
+              isDisabled={isPending}
+            >
+              share
+            </Button>
+          </motion.div>
         </div>
-      </div>
-      <div className="text-white">
+      </motion.div>
+      <motion.div
+        className="flex-grow overflow-y-auto text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
         <DisplayThought />
-      </div>
+      </motion.div>
     </div>
   );
 };

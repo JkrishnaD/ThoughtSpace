@@ -1,3 +1,4 @@
+"use server"
 import { db } from "@/lib";
 
 export const useGetThoughts = async () => {

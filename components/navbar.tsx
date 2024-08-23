@@ -10,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DEFAULT_PUBLIC_ROUTE } from "@/routes";
 import { AvatarComponent } from "./avatar";
 
