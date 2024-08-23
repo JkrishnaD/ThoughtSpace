@@ -1,19 +1,21 @@
 "use client";
 import { Navbar } from "@/components/navbar";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@/components/ui/input";
-import { AvatarComponent } from "@/components/avatar";
-import { useCurrentUser } from "@/hooks/current-user";
+import { sendThought } from "@/actions/addThought";
+import { toast } from "sonner";
+import { DisplayThought } from "@/components/dispaly-thoughts";
 
 const HomePage = () => {
-
   const [thought, setThought] = useState("");
-  const [displayThought, setDisplayThought] = useState("");
-  const user=useCurrentUser();
-  
+  const [isPending, startTransition] = useTransition();
+
   const onClick = () => {
-    setDisplayThought(thought);
+    startTransition(() => {
+      sendThought({ thought });
+      toast.success("Thought Created");
+    });
   };
 
   return (
@@ -33,21 +35,14 @@ const HomePage = () => {
             variant="bordered"
             className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition"
             onClick={onClick}
+            isDisabled={isPending}
           >
             share
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-3 mt-6">
-        <div className="bg-white text-black p-4 rounded-lg">
-          <div>
-            <div className="flex flex-row items-center ">
-              <AvatarComponent />
-              {user?.name}
-            </div>
-          </div>
-          {displayThought}
-        </div>
+      <div className="text-white">
+        <DisplayThought />
       </div>
     </div>
   );
