@@ -4,10 +4,10 @@ import { ThoughtSchema } from "@/schemas";
 import { z } from "zod";
 import { db } from "@/lib";
 import { auth } from "@/auth";
-import { toast } from "sonner";
+
 export const sendThought = async (values: z.infer<typeof ThoughtSchema>) => {
   const details = await auth();
-  console.log(details);
+
   const validate = ThoughtSchema.safeParse(values);
   if (!validate) {
     return null;
