@@ -24,57 +24,59 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen inset-0 -z-10 h-full w-full items-center [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Navbar />
-      </motion.div>
-      <motion.div
-        className="relative mt-15 flex justify-center items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 2 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="flex items-center justify-center flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 font-mono">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Input
-              className="backdrop-blur-lg bg-transparent h-fit placeholder:text-white text-white w-[300px] lg:w-[600px] p-4"
-              placeholder="Share Your Thought....."
-              onChange={(e) => setThought(e.target.value)}
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Button
-              size="lg"
-              variant="bordered"
-              className="bg-inherit text-white border hover:bg-white hover:text-black rounded-md p-4 transition"
-              onClick={onClick}
-              isDisabled={isPending}
+    <div className="h-full w-full">
+      <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <div className="z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Navbar />
+        </motion.div>
+        <motion.div
+          className="mt-15 flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="flex items-center justify-center flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 font-mono">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              share
-            </Button>
-          </motion.div>
-        </div>
-      </motion.div>
-      <motion.div
-        className="flex-grow overflow-y-auto text-white"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        <DisplayThought />
-      </motion.div>
+              <Input
+                className="backdrop-blur-lg bg-white h-fit placeholder:text-black text-black w-[300px] lg:w-[600px] p-4"
+                placeholder="Share Your Thought....."
+                onChange={(e) => setThought(e.target.value)}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button
+                size="lg"
+                className="text-black border bg-white rounded-md p-4 transition"
+                onClick={onClick}
+                isDisabled={isPending}
+              >
+                share
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
+        <motion.div
+          className="flex-grow overflow-y-auto text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <DisplayThought />
+        </motion.div>
+      </div>
     </div>
   );
 };
