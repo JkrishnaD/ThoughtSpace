@@ -10,7 +10,6 @@ export const useGetThoughts = async () => {
     });
     return allthoughts;
   } catch (error) {
-    console.log(error);
     return [];
   }
 };

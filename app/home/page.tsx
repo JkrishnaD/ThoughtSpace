@@ -24,8 +24,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="h-full w-full">
-      <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+    <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:14px_24px]">
       <div className="z-10">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
