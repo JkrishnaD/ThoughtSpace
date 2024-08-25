@@ -1,25 +1,26 @@
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
-import { DEFAULT_LOGIN_REDIRECT, DEFAULT_PUBLIC_ROUTE, authRoutes } from "./routes";
+import {
+  DEFAULT_LOGIN_REDIRECT,
+  DEFAULT_PUBLIC_ROUTE,
+  protectedRoutes,
+} from "./routes";
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req): any => {
+export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
+  console.log(isLoggedIn)
+  const isProtectedRoutes = protectedRoutes.includes(nextUrl.pathname);
 
-  if (isAuthRoutes) {
-    if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-    }
-    return null;
+  if (isLoggedIn) {
+    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
 
-//  if (!isLoggedIn) {
-//     return Response.redirect(new URL(DEFAULT_PUBLIC_ROUTE, nextUrl));
-//   }
-
+  if (!isLoggedIn && isProtectedRoutes) {
+    return Response.redirect(new URL(DEFAULT_PUBLIC_ROUTE, nextUrl));
+  }
 });
 
 export const config = {

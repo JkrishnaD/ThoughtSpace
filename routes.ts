@@ -13,6 +13,7 @@ export const DEFAULT_LOGIN_REDIRECT: string = "/home";
  * These Routes will redirect the users to Home page
  * @type {string[]}
  * */
-export const authRoutes:string[] = [
-    "/auth/login/"
+export const protectedRoutes:string[] = [
+    "/home",
+    "/mythoughts"
 ]

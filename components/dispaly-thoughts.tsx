@@ -1,11 +1,9 @@
 "use client";
 import { useGetThoughts } from "@/hooks/all-thoughts";
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader } from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { motion } from "framer-motion";
-import { MdDelete } from "react-icons/md";
-import { deleteThought } from "@/actions/deleteThought";
 import { useCurrentUser } from "@/hooks/current-user";
 
 interface Thought {
@@ -31,12 +29,6 @@ export const DisplayThought = () => {
     };
     fetchData();
   }, [setThoughts]);
-  console.log(user?.id)
-  const handleDelete = async (thoughtId: string) => {
-    await deleteThought(thoughtId);
-    setThoughts(thoughts.filter((thought) => thought.id !== thoughtId));
-  };
-
   return (
     <div className="grid text-black lg:grid-cols-3 grid-cols-1 font-mono z-10 p-3">
       {thoughts.map((thought) => (
@@ -47,7 +39,7 @@ export const DisplayThought = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="text-black m-2 backdrop-blur-md bg-white border-none">
+            <Card className="text-black m-2 backdrop-blur-md bg-white border-none shadow-sm shadow-black">
               <CardHeader className="flex justify-between flex-row">
                 <div className="flex flex-row items-center gap-2">
                   <Avatar className="hover:scale-125 transition">
@@ -61,16 +53,15 @@ export const DisplayThought = () => {
                   </Avatar>
                   <p className="font-bold">{thought.user.name}</p>
                 </div>
-                {user?.id !== thought.user.id && (
-                  <MdDelete
-                    onClick={() => handleDelete(thought.id)}
-                    color="red"
-                    className="hover:cursor-pointer"
-                    size={20}
-                  />
-                )}
               </CardHeader>
               <CardContent>{thought.content}</CardContent>
+              <CardFooter>
+                <p className="text-sm text-gray-500">
+                  Thought Shared At: {new Date(thought.createdAt).toLocaleString("en-US",{
+                    hour12:true
+                  })}
+                </p>
+              </CardFooter>
             </Card>
           </motion.div>
         </div>

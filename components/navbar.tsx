@@ -16,9 +16,9 @@ import { AvatarComponent } from "./avatar";
 export const Navbar = () => {
   const user = useCurrentUser();
   return (
-    <div className="text-black flex flex-row justify-between p-4 px-20 bg-inherit">
-      <div className="text-xl font-bold font-mono">
-        <Link href="/home">ThoughtSpace</Link>
+    <div className="text-black flex flex-row justify-between p-4 lg:px-20 px-10 bg-inherit">
+      <div className=" z-10 text-xl font-bold font-mono">
+        <Link className="bg-white p-2" href="/home">ThoughtSpace</Link>
       </div>
       <div>
         <DropdownMenu>
