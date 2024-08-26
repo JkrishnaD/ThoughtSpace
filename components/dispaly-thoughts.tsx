@@ -31,41 +31,46 @@ export const DisplayThought = () => {
   }, [setThoughts]);
   return (
     <div className="grid text-black lg:grid-cols-3 grid-cols-1 font-mono z-10 p-3">
-      {thoughts.map((thought) => (
-        <div key={thought.id}>
-          <motion.div
-            key={thought.id}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card className="text-black m-2 backdrop-blur-md bg-white border-none shadow-sm shadow-black">
-              <CardHeader className="flex justify-between flex-row">
-                <div className="flex flex-row items-center gap-2">
-                  <Avatar className="hover:scale-125 transition">
-                    <AvatarImage src={thought.user.image || ""} />
-                    <AvatarFallback>
-                      {thought.user.name
-                        ?.split(" ")
-                        .map((word) => word[0])
-                        .join("") || ""}
-                    </AvatarFallback>
-                  </Avatar>
-                  <p className="font-bold">{thought.user.name}</p>
-                </div>
-              </CardHeader>
-              <CardContent>{thought.content}</CardContent>
-              <CardFooter>
-                <p className="text-sm text-gray-500">
-                  Thought Shared At: {new Date(thought.createdAt).toLocaleString("en-US",{
-                    hour12:true
-                  })}
-                </p>
-              </CardFooter>
-            </Card>
-          </motion.div>
-        </div>
-      ))}
+      {[...thoughts]
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        .map((thought, index) => (
+          <div key={thought.id}>
+            <motion.div
+              key={thought.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="text-black m-2 backdrop-blur-md bg-white border-none shadow-sm overflow-y-auto h-[200px] shadow-black">
+                <CardHeader className="flex justify-between flex-row">
+                  <div className="flex flex-row items-center gap-2">
+                    <Avatar className="hover:scale-125 transition">
+                      <AvatarImage src={thought.user.image || ""} />
+                      <AvatarFallback>
+                        {thought.user.name
+                          ?.split(" ")
+                          .map((word) => word[0])
+                          .join("") || ""}
+                      </AvatarFallback>
+                    </Avatar>
+                    <p className="font-bold">{thought.user.name}</p>
+                  </div>
+                </CardHeader>
+                <CardContent>{thought.content}</CardContent>
+                <CardFooter>
+                  <p className="text-sm text-gray-500">
+                    {new Date(thought.createdAt).toLocaleString("en-US", {
+                      hour12: true,
+                    })}
+                  </p>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          </div>
+        ))}
     </div>
   );
 };

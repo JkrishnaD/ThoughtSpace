@@ -19,7 +19,7 @@ export const Navbar = () => {
   return (
     <div className="text-black flex flex-row justify-between p-4 lg:px-20 px-10 bg-inherit">
       <div className=" z-10 text-xl font-bold font-mono">
-        <Link className="bg-white p-2 flex flex-row" href="/home">
+        <Link className="bg-white p-3 flex flex-row border rounded-2xl" href="/home">
           <TfiThought size={30} className="bg-white mr-2" />
           ThoughtSpace
         </Link>

@@ -37,7 +37,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-800 text-sm md:text-xl dark:text-gray-400">
-            Express your <b>Thoughts</b>, connect with like-minded individuals, and discover fresh perspectives in a secure and vibrant space.
+            Express your <b>Thoughts</b>, Connect with like-minded Individuals and Discover fresh Perspectives in a secure and Vibrant space.
             </p>
           </div>
           <div className="flex space-x-4 flex-col lg:flex-row justify-center gap-2 items-center">
