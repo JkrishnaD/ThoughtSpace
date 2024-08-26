@@ -13,6 +13,8 @@ import { MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
 import { deleteThought } from "@/actions/deleteThought";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Thought {
   id: string;
@@ -57,50 +59,61 @@ const MyThoughtsPage = () => {
         <h1 className=" relative font-bold bg-white border rounded-sm w-fit z-10 p-3 bottom-2 shadow-sm shadow-black">
           Thoughts You Shared..
         </h1>
-        <div className="grid lg:grid-cols-3 grid-cols-1 mr-2">
-          {myThoughts.map((thought) => (
-            <div key={thought.id}>
-              <motion.div
-                key={thought.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Card className="text-black m-2 backdrop-blur-md shadow-sm shadow-black bg-white border-none lg:w-[400px]">
-                  <CardHeader className="flex justify-between flex-row">
-                    <div className="flex flex-row items-center gap-2">
-                      <Avatar className="hover:scale-125 transition">
-                        <AvatarImage src={thought.user.image || ""} />
-                        <AvatarFallback>
-                          {thought.user.name
-                            ?.split(" ")
-                            .map((word) => word[0])
-                            .join("") || ""}
-                        </AvatarFallback>
-                      </Avatar>
-                      <p className="font-bold">{thought.user.name}</p>
-                    </div>
-                    <MdDelete
-                      onClick={() => handleDelete(thought.id)}
-                      color="red"
-                      className="hover:cursor-pointer"
-                      size={20}
-                    />
-                  </CardHeader>
-                  <CardContent>{thought.content}</CardContent>
-                  <CardFooter>
-                    <p className="text-sm text-gray-500">
-                      Thought Shared At:{" "}
-                      {new Date(thought.createdAt).toLocaleString("en-US", {
-                        hour12: true,
-                      })}
-                    </p>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            </div>
-          ))}
-        </div>
+        {myThoughts.length > 0 ? (
+          <div className="grid lg:grid-cols-3 grid-cols-3 mr-2">
+            {myThoughts.map((thought, index) => (
+              <div key={thought.id}>
+                <motion.div
+                  key={thought.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="text-black m-2 backdrop-blur-md shadow-sm shadow-black bg-white border-none overflow-y-auto lg:w-[400px] h-[200px]">
+                    <CardHeader className="flex justify-between flex-row">
+                      <div className="flex flex-row items-center gap-2">
+                        <Avatar className="hover:scale-125 transition">
+                          <AvatarImage src={thought.user.image || ""} />
+                          <AvatarFallback>
+                            {thought.user.name
+                              ?.split(" ")
+                              .map((word) => word[0])
+                              .join("") || ""}
+                          </AvatarFallback>
+                        </Avatar>
+                        <p className="font-bold">{thought.user.name}</p>
+                      </div>
+                      <MdDelete
+                        onClick={() => handleDelete(thought.id)}
+                        color="red"
+                        className="hover:cursor-pointer"
+                        size={20}
+                      />
+                    </CardHeader>
+                    <CardContent className="overflow-y-auto flex-grow">{thought.content}</CardContent>
+                    <CardFooter className="mt-auto flex inset-x-0 bottom-0">
+                      <p className="text-sm text-gray-500 bottom-0">
+                        Thought Shared At:{" "}
+                        {new Date(thought.createdAt).toLocaleString("en-US", {
+                          hour12: true,
+                        })}
+                      </p>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="z-10 mt-10 flex items-center justify-center flex-col text-center h-full">
+            <p className="bg-white p-4 rounded-md border">
+              You Don't have any Thoughts
+            </p>
+            <Button className="mt-4">
+              <Link href="/home">Share Your Thoughts</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
