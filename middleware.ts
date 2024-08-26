@@ -11,12 +11,13 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  console.log(isLoggedIn)
   const isProtectedRoutes = protectedRoutes.includes(nextUrl.pathname);
 
-  if (isLoggedIn) {
-    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-  }
+  // if (isLoggedIn && isProtectedRoutes) {
+  //   if (nextUrl.pathname !== DEFAULT_LOGIN_REDIRECT) {
+  //     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+  //   }
+  // }
 
   if (!isLoggedIn && isProtectedRoutes) {
     return Response.redirect(new URL(DEFAULT_PUBLIC_ROUTE, nextUrl));

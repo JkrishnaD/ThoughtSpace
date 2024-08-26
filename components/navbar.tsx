@@ -12,18 +12,22 @@ import {
 } from "./ui/dropdown-menu";
 import { DEFAULT_PUBLIC_ROUTE } from "@/routes";
 import { AvatarComponent } from "./avatar";
+import { TfiThought } from "react-icons/tfi";
 
 export const Navbar = () => {
   const user = useCurrentUser();
   return (
     <div className="text-black flex flex-row justify-between p-4 lg:px-20 px-10 bg-inherit">
       <div className=" z-10 text-xl font-bold font-mono">
-        <Link className="bg-white p-2" href="/home">ThoughtSpace</Link>
+        <Link className="bg-white p-2 flex flex-row" href="/home">
+          <TfiThought size={30} className="bg-white mr-2" />
+          ThoughtSpace
+        </Link>
       </div>
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger className="font-bold text-black">
-            <AvatarComponent/>
+            <AvatarComponent />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="z-50 bg-white text-black p-2 rounded-md space-y-3 ">
             <DropdownMenuItem>{user?.name || ""}</DropdownMenuItem>
@@ -31,7 +35,11 @@ export const Navbar = () => {
               <Link href="/mythoughts">My THoughts</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Button onClick={() => signOut({callbackUrl:DEFAULT_PUBLIC_ROUTE})}>Logout</Button>{" "}
+              <Button
+                onClick={() => signOut({ callbackUrl: DEFAULT_PUBLIC_ROUTE })}
+              >
+                Logout
+              </Button>{" "}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
