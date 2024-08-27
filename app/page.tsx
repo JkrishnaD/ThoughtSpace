@@ -75,7 +75,7 @@ export default function Home() {
         <footer className="absolute gap-3 p-2 bottom-0 flex items-center justify-center z-20">
           <h1>
             Devloped By
-            <span className="font-bold cursor-pointer hover:underline">
+            <span className="font-bold cursor-pointer hover:underline ml-1">
               JayaKrishna🥰
             </span>
           </h1>

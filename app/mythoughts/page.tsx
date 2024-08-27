@@ -59,8 +59,9 @@ const MyThoughtsPage = () => {
         <h1 className=" relative font-bold bg-white border rounded-sm w-fit z-10 p-3 bottom-2 shadow-sm shadow-black">
           Thoughts You Shared..
         </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-3">
         {myThoughts.length > 0 ? (
-          <div className="grid lg:grid-cols-3 grid-cols-3 mr-2">
+          <div className="mr-2">
             {myThoughts.map((thought, index) => (
               <div key={thought.id}>
                 <motion.div
@@ -115,6 +116,7 @@ const MyThoughtsPage = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
