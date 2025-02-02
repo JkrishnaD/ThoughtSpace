@@ -7,6 +7,7 @@ import { sendThought } from "@/actions/addThought";
 import { toast } from "sonner";
 import { DisplayThought } from "@/components/dispaly-thoughts";
 import { motion } from "framer-motion";
+import Chatbot from "@/components/chatbot";
 
 const HomePage = () => {
   const [thought, setThought] = useState("");
@@ -24,7 +25,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:14px_24px]">
+    <div className="inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:14px_24px]">
       <div className="z-10 min-h-screen flex flex-col">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -76,8 +77,12 @@ const HomePage = () => {
           <DisplayThought />
         </motion.div>
       </div>
+      <div className="fixed bottom-4 right-4">
+        <Chatbot />
+      </div>
     </div>
   );
 };
 
 export default HomePage;
+
